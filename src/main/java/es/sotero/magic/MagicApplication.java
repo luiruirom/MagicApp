@@ -3,6 +3,7 @@ package es.sotero.magic;
 import java.util.Arrays;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,12 +25,17 @@ public class MagicApplication {
 			@Override
 			public void run(String... args) throws Exception {
 				List<Employee> employees = Arrays.asList(
-                        new Employee("John", "Doe"),
-                        new Employee("Jane", "Doe"),
-                        new Employee("Tom", "Doe")
-                        );
+					Employee.of("John Doe", "1"),
+					Employee.of("John Doe", "2"),
+					Employee.of("John Doe", "3")
+				);
 			employeeRepository.saveAll(employees);
 			}
 		};
+	}
+
+	@Bean
+	ModelMapper modelMapper() {
+		return new ModelMapper();
 	}
 }

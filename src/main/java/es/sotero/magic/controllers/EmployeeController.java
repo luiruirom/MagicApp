@@ -1,22 +1,48 @@
 package es.sotero.magic.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import es.sotero.magic.dto.EmployeeDTO;
+import es.sotero.magic.services.EmployeeService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import es.sotero.magic.entities.Employee;
-import es.sotero.magic.repositories.EmployeeRepository;
 
+@CrossOrigin
+@AllArgsConstructor
 @RequestMapping("/api/employee")
 @RestController
-public class EmployeeController {	
-	
-	 @Autowired
-	 private EmployeeRepository employeeRepository;
-	 
-	 @GetMapping
-	 Iterable<Employee> list() {
-		 return employeeRepository.findAll();
-	 }
+public class EmployeeController {
+
+    private final EmployeeService service;
+
+    @GetMapping
+    public Iterable<Employee> list() {
+        return service.list();
+    }
+
+    @GetMapping("/{id}")
+    public Employee get(@PathVariable Integer id) {
+        return service.findById(id);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public Employee create(@Validated @RequestBody EmployeeDTO employeeDTO) {
+        return service.create(employeeDTO);
+    }
+
+    @PutMapping("/{id}")
+    public Employee update(@PathVariable Integer id,
+                           @Validated @RequestBody EmployeeDTO employeeDTO) {
+        return service.update(id, employeeDTO);
+
+    }
+
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        service.delete(id);
+    }
 }
