@@ -1,16 +1,15 @@
 package es.sotero.magic;
 
-import java.util.Arrays;
-import java.util.List;
-
+import es.sotero.magic.entities.Employee;
+import es.sotero.magic.repositories.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import es.sotero.magic.entities.Employee;
-import es.sotero.magic.repositories.EmployeeRepository;
+import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class MagicApplication {
@@ -29,7 +28,8 @@ public class MagicApplication {
 					Employee.of("John Doe", "2"),
 					Employee.of("John Doe", "3")
 				);
-			employeeRepository.saveAll(employees);
+				employeeRepository.saveAll(employees);
+
 			}
 		};
 	}

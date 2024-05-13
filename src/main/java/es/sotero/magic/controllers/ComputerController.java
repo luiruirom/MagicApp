@@ -1,8 +1,8 @@
 package es.sotero.magic.controllers;
 
-import es.sotero.magic.dto.EmployeeDTO;
-import es.sotero.magic.entities.Employee;
-import es.sotero.magic.services.EmployeeService;
+import es.sotero.magic.dto.ComputerDTO;
+import es.sotero.magic.entities.Computer;
+import es.sotero.magic.services.ComputerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -10,32 +10,32 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @AllArgsConstructor
-@RequestMapping("/api/employee")
+@RequestMapping("/api/computer")
 @RestController
-public class EmployeeController {
+public class ComputerController {
 
-    private final EmployeeService service;
+    private final ComputerService service;
 
     @GetMapping
-    public Iterable<Employee> list() {
+    public Iterable<Computer> list() {
         return service.list();
     }
 
     @GetMapping("/{id}")
-    public Employee get(@PathVariable Integer id) {
+    public Computer get(@PathVariable Integer id) {
         return service.findById(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Employee create(@Validated @RequestBody EmployeeDTO employeeDTO) {
-        return service.create(employeeDTO);
+    public Computer create(@Validated @RequestBody ComputerDTO computerDTO) {
+        return service.create(computerDTO);
     }
 
     @PutMapping("/{id}")
-    public Employee update(@PathVariable Integer id,
-                           @Validated @RequestBody EmployeeDTO employeeDTO) {
-        return service.update(id, employeeDTO);
+    public Computer update(@PathVariable Integer id,
+                           @Validated @RequestBody ComputerDTO computerDTO) {
+        return service.update(id, computerDTO);
 
     }
 

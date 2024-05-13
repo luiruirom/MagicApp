@@ -1,8 +1,8 @@
 package es.sotero.magic.controllers;
 
-import es.sotero.magic.dto.EmployeeDTO;
-import es.sotero.magic.entities.Employee;
-import es.sotero.magic.services.EmployeeService;
+import es.sotero.magic.dto.UserDTO;
+import es.sotero.magic.entities.User;
+import es.sotero.magic.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -10,32 +10,32 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @AllArgsConstructor
-@RequestMapping("/api/employee")
+@RequestMapping("/api/user")
 @RestController
-public class EmployeeController {
+public class UserController {
 
-    private final EmployeeService service;
+    private final UserService service;
 
     @GetMapping
-    public Iterable<Employee> list() {
+    public Iterable<User> list() {
         return service.list();
     }
 
     @GetMapping("/{id}")
-    public Employee get(@PathVariable Integer id) {
+    public User get(@PathVariable Integer id) {
         return service.findById(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Employee create(@Validated @RequestBody EmployeeDTO employeeDTO) {
-        return service.create(employeeDTO);
+    public User create(@Validated @RequestBody UserDTO userDTO) {
+        return service.create(userDTO);
     }
 
     @PutMapping("/{id}")
-    public Employee update(@PathVariable Integer id,
-                           @Validated @RequestBody EmployeeDTO employeeDTO) {
-        return service.update(id, employeeDTO);
+    public User update(@PathVariable Integer id,
+                           @Validated @RequestBody UserDTO userDTO) {
+        return service.update(id, userDTO);
 
     }
 
