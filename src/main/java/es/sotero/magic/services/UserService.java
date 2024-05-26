@@ -24,6 +24,10 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(ResourceNotFoundException::new);
+    }
+
     public User create(UserDTO userDTO) {
         User user = modelMapper.map(userDTO, User.class);
         return userRepository.save(user);
@@ -39,5 +43,10 @@ public class UserService {
     public void delete(Integer id) {
         User userToDelete = findById(id);
         userRepository.delete(userToDelete);
+    }
+
+    public String isAdmin(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(ResourceNotFoundException::new);
+        return user.getRole().toString();
     }
 }

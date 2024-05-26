@@ -20,5 +20,5 @@ public class Computer {
 	private String name;
 
 	@NonNull
-	private String email;
+	private int cost;
 }

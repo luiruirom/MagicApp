@@ -21,10 +21,13 @@ public class UserController {
         return service.list();
     }
 
-    @GetMapping("/{id}")
-    public User get(@PathVariable Integer id) {
-        return service.findById(id);
+    @GetMapping("/{username}")
+    public User get(@PathVariable String username) {
+        return service.findByUsername(username);
     }
+
+    @GetMapping("/isAdmin/{username}")
+    public String isAdmin(@PathVariable String username) { return service.isAdmin(username); }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping

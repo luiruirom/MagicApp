@@ -40,6 +40,7 @@ public class User implements UserDetails {
 	String lastName;
 
 	@NonNull
+	@Enumerated(EnumType.STRING)
 	Role role;
 
 	@Override

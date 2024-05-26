@@ -17,22 +17,6 @@ public class MagicApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MagicApplication.class, args);
 	}
-	
-	@Bean
-	CommandLineRunner runner(EmployeeRepository employeeRepository) {
-		return new CommandLineRunner() {
-			@Override
-			public void run(String... args) throws Exception {
-				List<Employee> employees = Arrays.asList(
-					Employee.of("John Doe", "1"),
-					Employee.of("John Doe", "2"),
-					Employee.of("John Doe", "3")
-				);
-				employeeRepository.saveAll(employees);
-
-			}
-		};
-	}
 
 	@Bean
 	ModelMapper modelMapper() {
